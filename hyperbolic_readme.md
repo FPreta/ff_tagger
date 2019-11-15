@@ -1,0 +1,6 @@
+This project generalizes the linear component a given POS tagger's architecture to spaces without scalar product, so that features and weights can be embedded in them.
+In Pytorch example we translate the original POS tagger from Dynet to Pytorch.
+In Deep Network with Euclidean Distance we introduce the aforementioned new architecture.
+In Deep Network with Hyperbolic Distance (Poincaré ball) we embed inputs and hidden layers in the Hyperbolic ball model, then apply the architecture introduced in Deep Network with Euclidean Distance and code the backpropagation explicitly to introduce Riemannian Gradient Descent.
+The results of running these models with different embedding dimensions are stored in data/data/en.pos.dev.raw.output followed by either pyex.dimxx, eucl.dimxx.square or hyperbball.dimxx depending on which architecture they come from (pyex= Python Example, eucl=Deep Network with Euclidean Distance, hyperbball=Deep Network with Hyperbolic Distance (Poincaré ball)).
+The accuracy can be plotted through the code in Accuracy Plot, with the given data.
