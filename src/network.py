@@ -15,6 +15,7 @@ class Network:
         self.updater = dynet.AdamTrainer(self.model)
 
         # create embeddings for words and tag features.
+        #We need to make sure that they stay in the hyperbolic space (their norm is bound by one)
         self.word_embedding = self.model.add_lookup_parameters((vocab.num_words(), properties.word_embed_dim))
         self.tag_embedding = self.model.add_lookup_parameters((vocab.num_tag_feats(), properties.pos_embed_dim))
 
@@ -27,11 +28,11 @@ class Network:
         self.input_dim = 5 * properties.word_embed_dim + 2 * properties.pos_embed_dim
 
         # define the hidden layer.
+        # this also needs to be in the hyperbolic space
         self.hidden_layer = self.model.add_parameters((properties.hidden_dim, self.input_dim))
 
         # define the hidden layer bias term and initialize it as constant 0.2.
         self.hidden_layer_bias = self.model.add_parameters(properties.hidden_dim, init=dynet.ConstInitializer(0.2))
-
         # define the output weight.
         self.output_layer = self.model.add_parameters((vocab.num_tags(), properties.hidden_dim))
 
